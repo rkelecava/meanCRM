@@ -1,0 +1,135 @@
+<div class="page-header">
+	<h1>Welcome...</h1>
+</div>
+
+<div style="padding-left:30px;">
+	<p>Please take a few moments to configure your CRM</p>
+	<form>
+		<div class="col-md-4">
+			<div class="form-module">
+				<h4>Company info</h4>
+				<div style="padding-left: 30px;">
+					<fieldset class="form-group form-group-sm">
+						<label for="companyName">Name</label>
+						<input id="companyName" class="form-control rounded-input" type="text" placeholder="Company name" ng-model="companyInfo.name" required />
+					</fieldset>
+
+					<fieldset class="form-group form-group-sm">
+						<label for="companyAddress1">Address</label>
+						<input id="companyAddress1" class="form-control rounded-input" type="text" placeholder="Address 1" ng-model="companyInfo.address1" required />
+						<input id="companyAddress2" class="form-control rounded-input" type="text" placeholder="Address 2" ng-model="companyInfo.address2" />
+						<input id="companyCity" class="form-control rounded-input" type="text" placeholder="City" ng-model="companyInfo.city" required />
+						<select id="companyState" class="form-control rounded-input" ng-options="item as item for item in getStates | orderBy:item" ng-model="companyInfo.state" required>
+							<option value="" selected>Select a state</option>
+						</select>
+						<input id="companyZip" class="form-control rounded-input" type="text" placeholder="Zip code" ng-model="companyInfo.zip" required />
+					</fieldset>
+
+					<fieldset class="form-group form-group-sm">
+						<label for="companyPhone">Phone</label>
+						<input id="companyPhone" class="form-control rounded-input" type="text" placeholder="(xxx) xxx-xxxx" ng-model="companyInfo.phone" />
+					</fieldset>
+
+				</div>
+
+			</div>
+
+			<div class="form-module">
+				<h4>Admin credentials</h4>
+				<div style="padding-left: 30px;">
+
+					<fieldset class="form-group form-group-sm">
+						<label for="credentialsUser">Username</label>
+						<input id="credentialsUser" class="form-control rounded-input" type="text" placeholder="Username" ng-model="credentialsInfo.username" required />
+					</fieldset>
+
+					<fieldset class="form-group form-group-sm">
+						<label for="credentialsPw">Password</label>
+						<input id="credentialsPw" class="form-control rounded-input" type="password" placeholder="Password" ng-model="credentialsInfo.password" required />
+					</fieldset>
+
+					<fieldset class="form-group form-group-sm">
+						<label for="credentialsPwConf">Confirm password</label>
+						<input id="credentialsPwConf" class="form-control rounded-input" type="password" placeholder="Confirm password" ng-model="credentialsInfo.passwordConfirmation" required />
+					</fieldset>
+
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-md-4">
+
+			<div class="form-module">
+				<h4>System admin</h4>
+				<div style="padding-left: 30px;">
+
+					<fieldset class="form-group form-group-sm">
+						<label for="adminFirst">First Name</label>
+						<input id="adminFirst" class="form-control rounded-input" type="text" placeholder="First name" ng-model="adminInfo.first" required />
+					</fieldset>
+
+					<fieldset class="form-group form-group-sm">
+						<label for="adminLast">Last Name</label>
+						<input id="adminLast" class="form-control rounded-input" type="text" placeholder="Last name" ng-model="adminInfo.last" required />
+					</fieldset>
+
+					<fieldset class="form-group form-group-sm">
+						<label for="adminTitle">Title</label>
+						<input id="adminTitle" class="form-control rounded-input" type="text" placeholder="Title" ng-model="adminInfo.title" required />
+					</fieldset>
+
+					<fieldset class="form-group form-group-sm">
+						<label for="adminEmail">E-mail address</label>
+						<input id="adminEmail" class="form-control rounded-input" type="email" placeholder="E-mail address" ng-model="adminInfo.email" required />
+					</fieldset>
+
+					<fieldset class="form-group form-group-sm">
+						<label for="adminPhone">Phone</label>
+						<input id="adminPhone" class="form-control rounded-input" type="text" placeholder="Phone" ng-model="adminInfo.phone" required />
+					</fieldset>
+				</div>
+				
+			</div>
+			<div class="form-module">
+				<h4>Server settings</h4>
+				<div style="padding-left: 30px;">
+
+					<fieldset class="form-group form-group-sm">
+						<label for="smtpServer">Smtp server</label>
+						<input id="smtpServer" class="form-control rounded-input" type="text" placeholder="ex. smtp.servername.com" ng-model="serverInfo.smtpServer" required />
+					</fieldset>
+
+					<fieldset class="form-group form-group-sm">
+						<label for="smtpUser">Smtp username</label>
+						<input id="smtpUser" class="form-control rounded-input" type="text" placeholder="ex. someuser@servername.com" ng-model="serverInfo.smtpUsername" required />
+					</fieldset>
+
+					<fieldset class="form-group form-group-sm">
+						<label for="smtpPw">Smtp password</label>
+						<input id="smtpPw" class="form-control rounded-input" type="password" placeholder="Smtp password" ng-model="serverInfo.smtpPassword" required />
+					</fieldset>
+
+					<fieldset class="form-group form-group-sm">
+						<label for="smtpPwConfirm">Confirm smtp password</label>
+						<input id="smtpPwConfirm" class="form-control rounded-input" type="password" placeholder="Confirm smtp password" ng-model="serverInfo.smtpPasswordConfirmation" required />
+					</fieldset>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+
+			<div class="form-module">
+				<h4>Submit your information</h4>
+				<div style="padding-left:30px;">
+					<p>Once you have filled out all of the required fields and you are sure that the information is correct, please click the button below.</p>
+					<button type="submit" class="btn btn-success rounded-input">Complete the setup</button>
+				</div>
+
+			</div>
+
+		</div>
+	</form>
+</div>
