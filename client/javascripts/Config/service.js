@@ -25,7 +25,10 @@ app.factory('config', [
 		};
 
 		o.addAdminInfo = function (adminInfo) {
-			angular.copy(adminInfo, o.adminInfo);
+			return $http.post('/configuration/adminInfo', adminInfo)
+				.success(function (data) {
+					angular.copy(data, o.adminInfo);
+				});
 		};
 
 		o.addCredentialsInfo = function (credentialsInfo) {
@@ -33,7 +36,10 @@ app.factory('config', [
 		};
 
 		o.addServerInfo = function (serverInfo) {
-			angular.copy(serverInfo, o.serverInfo);
+			return $http.post('/configuration/serverInfo', serverInfo)
+				.success(function (data) {
+					angular.copy(data, o.serverInfo);
+				});
 		};
 
 		return o;

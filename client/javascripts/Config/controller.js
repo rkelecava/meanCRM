@@ -14,9 +14,14 @@ app.controller('ConfigCtrl', ['$scope', 'config', function ($scope, config) {
 		config.addCredentialsInfo($scope.credentialsInfo);
 		config.addServerInfo($scope.serverInfo);
 		$scope.companyInfo = {};
+		$scope.adminInfo = {};
+		$scope.credentialsInfo = {};
+		$scope.serverInfo = {};
 	};
 
 
 	$scope.configCompanyInfo = config.companyInfo;
+	$scope.configAdminInfo = config.adminInfo;
+	$scope.configServerInfo = config.serverInfo;
 
 }]);

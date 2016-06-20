@@ -1,3 +1,7 @@
+if(!process.env.JWT_SECRET) {
+  var env = require('./env.js');
+}
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -7,6 +11,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 require('./models/CompanyInfo');
+require('./models/AdminInfo');
+require('./models/ServerInfo');
 
 mongoose.connect('mongodb://localhost/meanCRM');
 
