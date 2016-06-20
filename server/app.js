@@ -9,10 +9,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
 
+// models
 require('./models/CompanyInfo');
-require('./models/AdminInfo');
 require('./models/ServerInfo');
+require('./models/Users');
+
+// passport configuration
+require('./config/passport');
 
 mongoose.connect('mongodb://localhost/meanCRM');
 
@@ -29,6 +34,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+/* Initialize passport */
+app.use(passport.initialize());
 
 app.use('/', routes);
 app.use('/users', users);

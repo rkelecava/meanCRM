@@ -3,8 +3,8 @@ app.factory('config', [
 	'$http',
 	function ($http) {
 		var o = {
+			t:'',
 			companyInfo: {},
-			adminInfo: {},
 			credentialsInfo: {},
 			serverInfo: {},
 			states: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida',
@@ -24,21 +24,24 @@ app.factory('config', [
 				});
 		};
 
-		o.addAdminInfo = function (adminInfo) {
-			return $http.post('/configuration/adminInfo', adminInfo)
-				.success(function (data) {
-					angular.copy(data, o.adminInfo);
-				});
-		};
-
 		o.addCredentialsInfo = function (credentialsInfo) {
-			angular.copy(credentialsInfo, o.credentialsInfo);
+			return $http.post('/users', credentialsInfo)
+				.success(function (data) {
+					angular.copy(data, o.credentialsInfo);
+				});
 		};
 
 		o.addServerInfo = function (serverInfo) {
 			return $http.post('/configuration/serverInfo', serverInfo)
 				.success(function (data) {
 					angular.copy(data, o.serverInfo);
+				});
+		};
+
+		o.adminUserExists = function () {
+			return $http.get('/users/adminUserExists')
+				.then(function (res) {
+					return res.data;
 				});
 		};
 
