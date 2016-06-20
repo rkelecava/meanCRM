@@ -1,1 +1,33 @@
+.form-module {
+	background-color: #99ccff;
+	border-radius: 15px 50px 30px;
+	padding: 20px;
+	margin: 15px 40px 0px 40px;
+}
 
+.form-module-btn {
+	border-radius: 15px 50px 30px;
+	padding: 20px;
+	margin: 15px 40px 0px 40px;
+}
+
+textarea.rounded-input,
+.btn.rounded-input,
+select.form-control.rounded-input,
+input[type="text"].rounded-input,
+input[type="password"].rounded-input,
+input[type="datetime"].rounded-input,
+input[type="datetime-local"].rounded-input,
+input[type="date"].rounded-input,
+input[type="month"].rounded-inputs,
+input[type="time"].rounded-input,
+input[type="week"].rounded-input,
+input[type="number"].rounded-input,
+input[type="email"].rounded-input,
+input[type="url"].rounded-input,
+input[type="search"].rounded-input,
+input[type="tel"].rounded-input,
+input[type="color"].rounded-input,
+.uneditable-input.rounded-input {
+	border-radius: 15px 15px 15px 15px;
+}

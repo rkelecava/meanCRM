@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="meanCRM">
 	<head>
 		<title>M.E.A.N CRM</title>
 		<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.6/yeti/bootstrap.min.css" rel="stylesheet" />
-		<link href="./stylesheets/style.css" rel="stylesheet" />
+		<link href="/stylesheets/style.css" rel="stylesheet" />
 	</head>
 	<body>
 
 	<!-- Static navbar -->
-		<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default" ng-controller="NavCtrl">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -17,14 +17,14 @@
 	              		<span class="icon-bar"></span>
 	              		<span class="icon-bar"></span>
 	            	</button>
-	            	<a class="navbar-brand" href="#">meanCRM</a>
+	            	<a class="navbar-brand" href="/#/home" ng-bind="getCompanyName()+' CRM'"></a>
 	        	</div>
 	        	<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 	              		<li class="dropdown">
 	                		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Main Menu <span class="caret"></span></a>
 	                		<ul class="dropdown-menu">
-	                  			<li><a href="#">Item 1</a></li>
+	                  			<li><a href="/#/config">Config</a></li>
 	                  			<li><a href="#">Item 2</a></li>
 	                  			<li><a href="#">Item 3</a></li>
 		                  		<li role="separator" class="divider"></li>
@@ -43,9 +43,7 @@
 		</nav>
 	<!-- Static navbar -->
 		<div class="container">
-			<div class="page-header">
-				<h1>Working!</h1>
-			</div>
+			<ui-view></ui-view>
 		</div>
 
 
@@ -53,7 +51,30 @@
 	<script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-route.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+
+	<!-- Angular App -->
+
+		<!-- Modules -->
+			<script src="/javascripts/app.js"></script>
+		<!-- Modules -->
+
+		<!-- Services -->
+			<script src="/javascripts/Config/service.js"></script>
+		<!-- Services -->
+
+		<!-- Routes -->
+			<script src="/javascripts/routes.js"></script>
+		<!-- Routes -->
+
+		<!-- Controllers -->
+			<script src="/javascripts/Home/controller.js"></script>
+			<script src="/javascripts/Config/controller.js"></script>
+			<script src="/javascripts/Nav/controller.js"></script>
+		<!-- Controllers -->
+
+
+	<!-- Angular App -->
 
 	</body>
 </html>

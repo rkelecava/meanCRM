@@ -4,7 +4,7 @@
 
 <div style="padding-left:30px;">
 	<p>Please take a few moments to configure your CRM</p>
-	<form>
+	<form ng-submit="addConfiguration()">
 		<div class="col-md-4">
 			<div class="form-module">
 				<h4>Company info</h4>
@@ -89,7 +89,6 @@
 						<input id="adminPhone" class="form-control rounded-input" type="text" placeholder="Phone" ng-model="adminInfo.phone" required />
 					</fieldset>
 				</div>
-				
 			</div>
 			<div class="form-module">
 				<h4>Server settings</h4>
@@ -125,10 +124,12 @@
 				<h4>Submit your information</h4>
 				<div style="padding-left:30px;">
 					<p>Once you have filled out all of the required fields and you are sure that the information is correct, please click the button below.</p>
-					<button type="submit" class="btn btn-success rounded-input">Complete the setup</button>
+					<button type="submit" class="btn btn-default rounded-input">Complete the setup</button>
 				</div>
 
 			</div>
+
+			<p>{{configCompanyInfo}}</p>
 
 		</div>
 	</form>

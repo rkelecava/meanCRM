@@ -1,18 +1,22 @@
 // Config/controller.js
-app.controller('ConfigCtrl', ['$scope', function ($scope) {
+app.controller('ConfigCtrl', ['$scope', 'config', function ($scope, config) {
 
 	$scope.companyInfo = {};
 	$scope.adminInfo = {};
 	$scope.credentialsInfo = {};
 	$scope.serverInfo = {};
 
-	$scope.getStates = ['Alabama','Alaska','Arizona','Arkansas',
-		'California','Colorado','Connecticut','Delaware','Florida',
-		'Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas',
-		'Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan',
-		'Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire',
-		'New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma',
-		'Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee',
-		'Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+	$scope.getStates = config.states;
+
+	$scope.addConfiguration = function () {
+		config.addCompanyInfo($scope.companyInfo);
+		config.addAdminInfo($scope.adminInfo);
+		config.addCredentialsInfo($scope.credentialsInfo);
+		config.addServerInfo($scope.serverInfo);
+		$scope.companyInfo = {};
+	};
+
+
+	$scope.configCompanyInfo = config.companyInfo;
 
 }]);

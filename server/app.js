@@ -4,9 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+require('./models/CompanyInfo');
+
+mongoose.connect('mongodb://localhost/meanCRM');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var configuration = require('./routes/configuration');
 
 var app = express();
 
@@ -20,6 +26,7 @@ app.use(cookieParser());
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/configuration', configuration);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
