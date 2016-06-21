@@ -9,6 +9,16 @@ app.config([
 				url: '/home',
 				templateUrl: '/partials/_home.html',
 				controller: 'HomeCtrl',
+				resolve: {
+					configPromise: ['config', function (config) {
+						return config.getCompanyInfo();
+					}],
+					rolePromise: ['auth', function (auth) {
+						auth.getRoles().then(function () {
+							//console.log(auth.hasRole('admin'));
+						});
+					}]
+				},
 				onEnter: [
 					'$state',
 					'config',
@@ -34,6 +44,11 @@ app.config([
 							}
         				});
 					}]
+			})
+			.state('signin', {
+				url: '/signin',
+				templateUrl: '/partials/_signin.html',
+				controller: 'AuthCtrl'
 			});
 	}
 ]);

@@ -7,6 +7,55 @@ var jwt = require('express-jwt');
 
 var User = mongoose.model('User');
 
+/****************************/
+/* Middleware */
+/*****************************/
+
+// Middleware to check for authenticated JWT and get the payload
+var auth = jwt({
+	secret: process.env.JWT_SECRET,
+	userProperty: 'payload'
+});
+
+// Middleware to check if a user has admin permissions
+var checkAdmin = function (req, res, next) {
+
+	/* Loop through the user roles from the JWT payload 
+	if 'admin' role is found, continuing moving forward.
+		If not, return error w/ status 401 */
+	for (var i=0; i<req.payload.roles.length; i++) {
+		if (req.payload.roles[i]=='admin') {
+			return next();
+		}
+	}
+
+	var err = new Error('You do not have the required permissions to access this route');
+	err.status = 401;
+	return next(err);
+};
+
+// Middleware to check if a user has user permissions
+var checkUser = function (req, res, next) {
+
+	/* Loop through the user roles from the JWT payload 
+	if 'user' or 'admin' role is found, continuing moving forward.
+		If not, return error w/ status 401 */
+	for (var i=0; i<req.payload.roles.length; i++) {
+		if (req.payload.roles[i]=='admin' || req.payload.roles[i]=='user') {
+			return next();
+		}
+	}
+
+	var err = new Error('You do not have the required permissions to access this route');
+	err.status = 401;
+	return next(err);
+};
+
+/************************/
+/* End of Middleware */
+/************************/
+
+
 router.get('/', function(req, res, next) {
 	// Query db using mongoose find method
 	User.find( function (err, users) {
@@ -89,6 +138,88 @@ router.post('/', function (req, res, next) {
 		return res.json({token: user.generateJWT()});
 	});
 });
+
+
+/*****************************************
+/* Middleware to PRELOAD "User" Object.
+Define a new route parameter for :user */
+/******************************************/
+router.param('user', function (req, res, next, id) {
+
+	// Define a new query to search for user by ID
+	var query = User.findById(id);
+
+	// Execute the query
+	query.exec(function (err, user) {
+		// Return any errors
+		if (err) { return next(err); }
+		// If no user is found with given ID, return error
+		if (!user) { return next(new Error('can\'t find user')); }
+
+		// If no errors, set req.user = to user from db
+		req.user = user;
+		return next();
+	});
+});
+
+/*********************************/
+/* GET a single user by _id */
+/*********************************/
+router.get('/:user', auth, checkAdmin, function (req, res, next) {
+
+	// Return the user from the route parameter
+	return res.json(req.user);
+});
+
+/************************/
+/* GET a user's roles */
+/*******************************/
+router.get('/:user/roles', function (req, res, next) {
+
+	// Return the user from the route parameter
+	return res.json(req.user.roles);
+});
+
+
+/**************************/
+/* DELETE a user */
+/**************************/
+router.delete('/:user', auth, checkAdmin, function (req, res, next) {
+
+	// Remove user using mongoose remove method
+	req.user.remove(function (err, user) {
+		// Return any errors
+		if (err) { return next(err); }
+
+		return res.json({});
+
+	});
+});
+
+
+/************************/
+/* Route to login a user */
+/**************************/
+router.post('/login', function (req, res, next) {
+	if (!req.body.username || !req.body.password) {
+		return res.status(400).json({
+			message: 'Please fill out all required fields'
+		});
+	}
+
+	passport.authenticate('local', function (err, user, info) {
+		if (err) { return next(err); }
+
+		if (user) {
+			return res.json({
+				token: user.generateJWT()
+			});
+		} else {
+			return res.status(401).json(info);
+		}
+	})(req, res, next);
+});
+
 
 
 

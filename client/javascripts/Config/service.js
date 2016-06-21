@@ -3,7 +3,6 @@ app.factory('config', [
 	'$http',
 	function ($http) {
 		var o = {
-			t:'',
 			companyInfo: {},
 			credentialsInfo: {},
 			serverInfo: {},
@@ -42,6 +41,13 @@ app.factory('config', [
 			return $http.get('/users/adminUserExists')
 				.then(function (res) {
 					return res.data;
+				});
+		};
+
+		o.getCompanyInfo = function () {
+			return $http.get('/configuration/companyInfo')
+				.then(function (res) {
+					angular.copy(res.data[0], o.companyInfo);
 				});
 		};
 

@@ -1,11 +1,15 @@
 // Nav/controller.js
 
-app.controller('NavCtrl', ['$scope', function ($scope) {
-	$scope.companyName = 'Delta Electrical';
+app.controller('NavCtrl', ['$scope', 'auth', 'config', function ($scope, auth, config) {
 
-	$scope.getCompanyName = function () {
-		if(!$scope.companyName || $scope.companyName === '') { return 'meanCRM'; }
+	$scope.isLoggedIn = auth.isLoggedIn;
+	$scope.isAdmin = auth.isAdmin;
+	$scope.currentUser = auth.currentUser;
+	$scope.logOut = auth.logOut;
 
-		return $scope.companyName;
-	};
+	$scope.companyInfo = config.companyInfo;
+
+	$scope.hasRole = auth.hasRole;
+
+
 }]);

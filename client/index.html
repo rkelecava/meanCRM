@@ -17,26 +17,44 @@
 	              		<span class="icon-bar"></span>
 	              		<span class="icon-bar"></span>
 	            	</button>
-	            	<a class="navbar-brand" href="/#/home" ng-bind="getCompanyName()+' CRM'"></a>
+	            	<a class="navbar-brand" href="/#/home" ng-bind="companyInfo.name+' CRM'"></a>
 	        	</div>
 	        	<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
+	              		<li ng-show="isAdmin()" class="dropdown">
+	                		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Menu <span class="caret"></span></a>
+	                		<ul class="dropdown-menu">
+	                  			<li><a href="/#/config">Config</a></li>
+	                  			<li><a href="/#/users">Users</a></li>
+		                  	<!--	<li role="separator" class="divider"></li>
+		                  		<li class="dropdown-header">Nav header</li>
+		                  		<li><a href="#">Separated link</a></li>
+		                  		<li><a href="#">One more separated link</a></li> -->
+	                		</ul>
+	              		</li>
 	              		<li class="dropdown">
 	                		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Main Menu <span class="caret"></span></a>
 	                		<ul class="dropdown-menu">
-	                  			<li><a href="/#/config">Config</a></li>
-	                  			<li><a href="#">Item 2</a></li>
-	                  			<li><a href="#">Item 3</a></li>
-		                  		<li role="separator" class="divider"></li>
+	                  			<li><a href="/#/home">Dashboard</a></li>
+	                  			<li><a href="/#/tasks">Tasks</a></li>
+	                  			<li><a href="/#/campaigns">Campaigns</a></li>
+	                  			<li><a href="/#/leads">Leads</a></li>
+	                  			<li><a href="/#/accounts">Accounts</a></li>
+	                  			<li><a href="/#/contacts">Contacts</a></li>
+	                  			<li><a href="/#/opportunities">Opportunities</a></li>
+		                  		<li><a href="/#/team">Team</a></li>
+		                  	<!--	<li role="separator" class="divider"></li>
 		                  		<li class="dropdown-header">Nav header</li>
 		                  		<li><a href="#">Separated link</a></li>
-		                  		<li><a href="#">One more separated link</a></li>
+		                  		<li><a href="#">One more separated link</a></li> -->
 	                		</ul>
 	              		</li>
 					</ul>
 	            	<ul class="nav navbar-nav navbar-right">
-						<li><a href="/#/login">Log In</a></li>
-						<li><a href="/#/register">Register</a></li>
+	            		<li ng-show="isLoggedIn()"><a>{{currentUser()}}</a></li>
+    					<li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
+    					<li ng-hide="isLoggedIn()"><a href="/#/signin">Sign in</a></li>
+    					<li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
 	            	</ul>
 	        	</div><!--/.nav-collapse -->
 	    	</div><!--/.container-fluid -->
@@ -61,6 +79,7 @@
 
 		<!-- Services -->
 			<script src="/javascripts/Config/service.js"></script>
+			<script src="/javascripts/Auth/service.js"></script>
 		<!-- Services -->
 
 		<!-- Routes -->
@@ -71,6 +90,7 @@
 			<script src="/javascripts/Home/controller.js"></script>
 			<script src="/javascripts/Config/controller.js"></script>
 			<script src="/javascripts/Nav/controller.js"></script>
+			<script src="/javascripts/Auth/controller.js"></script>
 		<!-- Controllers -->
 
 
